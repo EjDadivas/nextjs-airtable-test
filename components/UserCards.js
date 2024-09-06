@@ -7,10 +7,32 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { UserForm } from "@/components/UserForm";
 
-export default function UserCards({ key, user, handleSubmit, handleDelete }) {
+export default function UserCards({
+  user,
+  handleSubmit,
+  handleDelete,
+  type,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  email,
+  setEmail,
+  gender,
+  setGender,
+  profile,
+  setProfile,
+}) {
+  const handleChange = () => {
+    setFirstName(user.fields.first_name);
+    setLastName(user.fields.last_name);
+    setEmail(user.fields.email);
+    setGender(user.fields.gender);
+  };
   return (
-    <Card key={key}>
+    <Card>
       <CardHeader className="aspect-square bg-gray-400 rounded-xl">
         <Image
           className="m-auto"
@@ -30,10 +52,22 @@ export default function UserCards({ key, user, handleSubmit, handleDelete }) {
       </CardContent>
       <CardFooter>
         <div className="w-full flex gap-4 justify-between">
-          <Button onClick={handleSubmit} className="w-full">
-            Submit
-          </Button>
-          <Button onClick={handleDelete} className="w-full" variant="outline">
+          <UserForm
+            type="edit"
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            email={email}
+            setEmail={setEmail}
+            gender={gender}
+            setGender={setGender}
+            handleSubmit={() => handleSubmit(user.id)}
+            handleChange={handleChange}
+            profile={profile}
+            setProfile={setProfile}
+          />
+          <Button onClick={() => handleDelete(user.id)} className="w-full">
             Delete
           </Button>
         </div>
