@@ -30,6 +30,7 @@ export default function UserCards({
     setLastName(user.fields.last_name);
     setEmail(user.fields.email);
     setGender(user.fields.gender);
+    setProfile(user.fields.profile);
   };
   return (
     <Card>
